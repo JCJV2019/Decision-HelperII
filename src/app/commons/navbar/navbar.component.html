@@ -1,0 +1,30 @@
+<mat-toolbar color="" class="gialloMio">
+  <div fxHide.gt-xs>
+    <button mat-icon-button (click)="onToggleSidenav()">
+      <mat-icon>menu</mat-icon>
+    </button>
+  </div>
+  <div fxFlex fxLayout fxLayoutAlign="start" fxHide.xs>
+    <ul fxLayout fxLayoutGap="15px" class="navigation-items">
+      <li>
+        <a routerLink="/home">home</a>
+      </li>
+      <li>
+        <a routerLink="/members">Helper</a>
+      </li>
+    </ul>
+  </div>
+  <div fxFlex fxLayout fxLayoutAlign="end" fxHide.xs>
+    <ul fxLayout fxLayoutGap="15px" class="navigation-items">
+      <li *ngIf="!isLogged">
+        <a routerLink="users/login">Login</a>
+      </li>
+      <li *ngIf="!isLogged">
+        <a routerLink="users/register">Register</a>
+      </li>
+      <li *ngIf="isLogged">
+        <a routerLink="home" (click)="onLogout()">Logout</a>
+      </li>
+    </ul>
+  </div>
+</mat-toolbar>

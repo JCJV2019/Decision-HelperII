@@ -1,0 +1,45 @@
+<div class=" container ">
+
+  <h1 class=" m-2 text-center">Preguntas del Usuario {{nombreUsuario}}</h1>
+
+  <div class="mt-4 listas row ">
+
+    <div class="Quest mt-2 col-xs-12 col-sm-12 col-lg-12">
+
+      <div *ngFor='let quest of lasPreguntas'>
+
+        <div class="miGrupo m-1">
+          <!--btn nuevo-->
+          <div class="input-group">
+            <input type="text" class="form-control" type="text" name="desc" [value]="quest.question"
+              [(ngModel)]="quest.question">
+
+          </div>
+
+          <div class="row pr-3 justify-content-end">
+            <button class=' m-1 form-control btn btn-circle btn-warning' style="width: 50px; height: 40px;"
+              (click)=editQuestion(quest)><i class="fas fa-pen-square"></i></button>
+            <button class=' m-1 form-control btn btn-circle btn-warning' style="width: 50px; height: 40px;"
+              (click)=deleteQuestion(quest._id)><i class="fas fa-times-circle"></i></button>
+            <button class=' m-1 form-control btn btn-circle btn-warning' style="width: 50px; height: 40px;"
+              (click)=selectQuestion(quest._id)><i class="fa fa-level-down"></i></button>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="row pr-3 justify-content-end">
+        <button class=' m-1 form-control btn btn-circle btn-warning' style="width: 50px; height: 40px;"
+          (click)=newQuestion()><i class="fas fa-plus"></i></button>
+      </div>
+
+    </div>
+
+  </div>
+</div>
+
+<script>
+  $("#resizable").resizable({
+    handles: 'e, w'
+  })
+</script>

@@ -1,0 +1,55 @@
+<div fxLayout="row" fxLayoutAlign="center center" class="register-main">
+
+  <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+    <mat-card>
+
+      <mat-card-header>
+
+        <mat-card-title>Register Page</mat-card-title>
+
+      </mat-card-header>
+
+      <mat-card-content fxLayout="column">
+
+        <mat-form-field>
+
+          <input matInput placeholder="User" [formControl]="registerForm.get('name')">
+
+        </mat-form-field>
+
+        <mat-form-field>
+
+          <input matInput placeholder="Email" [formControl]="registerForm.get('email')">
+
+        </mat-form-field>
+
+        <mat-form-field>
+
+          <input type="password" matInput placeholder="password" [formControl]="registerForm.get('password')">
+
+        </mat-form-field>
+      </mat-card-content>
+      <mat-error
+        *ngIf="(email.invalid || password.invalid) && (email.dirty || email.touched) && (name.dirty || name.touched)">
+        Los campos no pueden estar vacíos
+      </mat-error>
+      <mat-error *ngIf="(isError)">
+        {{msgError}}
+      </mat-error>
+      <mat-card-actions align="end">
+
+        <button type="submit" id="idBoton" mat-raised-button color="primary">Register</button>
+
+      </mat-card-actions>
+
+      <div class="loader" style="display:none">
+        <div class="dot dot1"></div>
+        <div class="dot dot2"></div>
+        <div class="dot dot3"></div>
+        <div class="dot dot4"></div>
+      </div>
+
+    </mat-card>
+  </form>
+
+</div>

@@ -1,0 +1,150 @@
+<div class=" container ">
+
+
+  <h1 class=" m-2 text-center">¿Qué duda tienes?</h1>
+
+  <div class="p-5 ">
+    <div class="input-group">
+      <input type="text" class="form-control" name="" placeholder="Escribe aqui" [disabled]='inputQuestion'
+        [(ngModel)]="theQuestion" (onblur)=mirarQuestion()>
+      <div class="input-group-append">
+        <button type="button" class="btn  btn-circle btn-warning" (click)=newQuestion()><i
+            class="fas fa-trash-alt"></i></button>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="form-group">
+    <label for="descItem">Descripción Aspecto:</label> <span class="text-danger"> {{messagePlace | uppercase}}</span>
+    <input type="text" class="form-control" name="descItem" #descItemField placeholder='Tu concepto'
+      [(ngModel)]="descripcion">
+
+    <div class=" d-inline-flex p-2 custom-control redio-warning">
+      <div class=''></div>
+      <p class='m-1'> Asignar un valor</p>
+
+      <label>
+        <input type="radio" class=" m-1 custom-control" [value]="valorPuntos.O1.value" [name]="valorPuntos.O1.name"
+          [(ngModel)]="puntos">
+      </label>
+      <label>
+        <input type="radio" class=" m-1 custom-control" [value]="valorPuntos.O2.value" [name]="valorPuntos.O2.name"
+          [(ngModel)]="puntos">
+      </label>
+      <label>
+        <input type="radio" class=" m-1 custom-control" [value]="valorPuntos.O3.value" [name]="valorPuntos.O3.name"
+          [(ngModel)]="puntos">
+      </label>
+      <label>
+        <input type="radio" class=" m-1 custom-control" [value]="valorPuntos.O4.value" [name]="valorPuntos.O4.name"
+          [(ngModel)]="puntos">
+      </label>
+      <p class='m-1'>{{puntos}}</p>
+    </div>
+
+    <div class="row">
+      <div class="col-6">
+        <button class='col-12 btn btn-warning btn-circle btn-warning ' (click)=addPositivo()>Aspecto Positivo</button>
+      </div>
+      <div class="col-6">
+        <button class='col-12 btn btn-warning btn-circle btn-warning ' (click)=addNegativo()>Aspecto Negativo</button>
+      </div>
+    </div>
+
+
+    <!--<button mat-button [routerLink]="['/newMember']">Nuevo cliente</button>-->
+
+    <div class="mt-4 listas row ">
+
+      <div class="lisP mt-2 col-xs-12 col-sm-6 col-lg-6">
+        <h3 class="text-center ">Aspectos Positivos</h3>
+        <div *ngFor='let pitem of itemsPositivos'>
+
+          <div class="miGrupo m-1">
+            <!--btn nuevo-->
+            <div class="input-group">
+              <input type="text" class="form-control" type="text" name="desc" [value]="pitem.desc"
+                [(ngModel)]="pitem.desc">
+
+              <div class="input-group-append">
+                <input class="form-control " type="number" style= "max-width: 60px !important;" min="1" max="4" [value]="pitem.point"
+                  [(ngModel)]="pitem.point">
+              </div>
+            </div>
+            <div class="row pr-3 justify-content-end">
+              <button class=' m-1 form-control btn btn-circle btn-warning' style="width: 50px; height: 40px;"
+                (click)=editPositivo(pitem)><i class="fas fa-pen-square"></i></button>
+              <button class=' m-1 form-control btn  btn-circle btn-warning' style="width: 50px; height: 40px;"
+                (click)=deletePositivo(pitem._id)><i class="fas fa-times-circle"></i></button>
+            </div>
+          </div>
+          <!--btn  fin nuevo-->
+
+        </div>
+      </div>
+      <!--fin lisP-->
+      <div class=" lisN mt-2 col-xs-12 col-sm-6 col-lg-6 ">
+        <h3 class="text-center">Aspectos Negativos</h3>
+        <div *ngFor='let nitem of itemsNegativos'>
+
+          <div class="miGrupo m-1">
+            <!--btn nuevo-->
+            <div class="input-group">
+              <input type="text" class="form-control" type="text" name="desc" [value]="nitem.desc"
+                [(ngModel)]="nitem.desc">
+
+              <div class="input-group-append">
+                <input class="form-control " type="number" style= "max-width: 60px !important;" min="1" max="4" [value]="nitem.point"
+                  [(ngModel)]="nitem.point">
+              </div>
+            </div>
+            <div class="row pr-3 justify-content-end">
+              <button class=' m-1 form-control btn btn-circle btn-warning' style="width: 50px; height: 40px;"
+                (click)=editNegativo(nitem)><i class="fas fa-pen-square"></i></button>
+              <button class=' m-1 form-control btn  btn-circle btn-warning' style="width: 50px; height: 40px;"
+                (click)=deleteNegativo(nitem._id)><i class="fas fa-times-circle"></i></button>
+            </div>
+          </div>
+          <!--btn  fin nuevo-->
+
+        </div>
+      </div>
+      <!--fine lisN-->
+
+    </div>
+    <!--fine lista-->
+
+  </div>
+
+
+  <div class=" m-5 d-flex justify-content-center">
+    <button class=" btn btn-warning btn-circle col-sm-4" (click)=consejo()>Consejo</button></div>
+
+
+
+  <div>
+    <h4>Resultado</h4>
+    <p>Coeficiente Positivos: {{puntuacionP}}</p>
+    <p>Coeficiente Negativos: {{puntuacionN}}</p>
+
+    <div class="semaforo">
+      <div *ngIf="semaforo == 1" id="resizable" class="red">¡¡¡NO tomes esa decision!!!</div>
+      <div *ngIf="semaforo == 2" id="resizable" class="yellow">no puedo mojarme</div>
+      <div *ngIf="semaforo == 3" id="resizable" class="green">¡¡¡Toma la Decision!!!</div>
+    </div>
+
+    <!--
+    <div *ngIf="puntuacionP > puntuacionN">¡¡¡Toma la Decision!!!</div>
+    <div *ngIf="puntuacionN > puntuacionP">¡¡¡NO tomes esa decision!!!</div>
+    -->
+
+  </div>
+</div>
+
+<script>
+  $("#resizable").resizable({
+    handles: 'e, w'
+  })
+</script>
+

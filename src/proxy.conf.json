@@ -1,0 +1,10 @@
+{
+  "/api": {
+    "target": "https://api-decison-helper2.herokuapp.com",
+    "secure": false,
+    "pathRewrite": {
+      "^/api": ""
+    },
+    "logLevel": "debug"
+  }
+}
